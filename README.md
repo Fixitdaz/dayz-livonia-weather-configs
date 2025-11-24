@@ -1,90 +1,168 @@
-# DayZ Weather Configuration Files for Livonia
+# DayZ Livonia Seasonal Weather Configurations
 
-XML weather configuration files for DayZ Livonia map on Xbox servers. Four seasonal presets included.
+XML weather configuration files for DayZ Livonia servers on Xbox. Four complete seasonal presets included.
 
-**Creator**: FixitDaz  
-**Date**: November 23, 2025
+## Overview
 
-## Files Overview
+Control your server's weather patterns with these optimised seasonal configurations. Each file provides distinct atmospheric conditions for immersive gameplay.
 
-Each XML file controls weather parameters on your Livonia server. Place these in your server's mission folder.
+## Features
+
+- Four complete seasonal weather presets
+- Optimised for Livonia map
+- Xbox server compatible
+- Ready to deploy configurations
+- Detailed parameter documentation
 
 ## Installation
 
-1. Navigate to your server mission folder
-2. Locate the existing `cfgweather.xml` file
-3. Back up the original file
-4. Replace with your chosen seasonal configuration
+1. Access your server mission folder
+2. Locate `cfgweather.xml`
+3. Back up your current file
+4. Replace with chosen seasonal configuration
 5. Restart the server
 
 ## Seasonal Configurations
 
-### Spring Weather
-Moderate conditions with variable cloud cover and occasional rain.
+### Spring (cfgweather-spring.xml)
+Moderate conditions with variable weather patterns.
 
-- Overcast: 50-75% cloud coverage
-- Fog: Light (0-60% intensity)
-- Rain: Triggers at 85%+ overcast
-- Wind: Moderate (max 8 m/s)
-- Storms: Active at 90%+ overcast, 60s between strikes
+- Cloud coverage: 20-80%
+- Fog intensity: 0-40%
+- Rain threshold: 60-80% overcast
+- Max wind speed: 12 m/s
+- Storms: Active at 90%+ overcast
 
-### Summer Weather
-Clear skies with minimal precipitation. Best visibility conditions.
+### Summer (cfgweather-summer.xml)
+Clear skies with minimal precipitation.
 
-- Overcast: 20-80% cloud coverage
-- Fog: Minimal (0-40% intensity)
-- Rain: Triggers at 60-80% overcast
-- Wind: Stronger (max 12 m/s)
-- Storms: Active at 90%+ overcast, 60s between strikes
+- Cloud coverage: 0-60%
+- Fog intensity: 0-10%
+- Rain threshold: Any overcast level
+- Max wind speed: 15 m/s
+- Storms: Active at 90%+ overcast
 
-### Autumn (Fall) Weather
-Clearer conditions with increasing wind. Reduced fog and rain.
+### Autumn (cfgweather-autumn.xml)
+Clear conditions with strong winds.
 
-- Overcast: 0-60% cloud coverage
-- Fog: Rare (0-10% intensity)
-- Rain: Light (max 50% intensity), triggers at any overcast level
-- Wind: Strong (max 15 m/s)
-- Storms: Active at 90%+ overcast, 60s between strikes
+- Cloud coverage: 0-60%
+- Fog intensity: 0-10%
+- Rain threshold: Any overcast level
+- Max wind speed: 15 m/s
+- Storms: Active at 90%+ overcast
 
-### Winter Weather
-Heavy overcast with fog and snowfall. Harsh survival conditions.
+### Winter (cfgweather-winter.xml)
+Harsh conditions with snow and heavy fog.
 
-- Overcast: 75-85% cloud coverage
-- Fog: Heavy (30-80% intensity)
-- Rain: Triggers at 75-78% overcast
-- Snowfall: Triggers at 78-85% overcast
-- Wind: Moderate (max 12 m/s)
-- Storms: Rare (triggers at 100% overcast only)
+- Cloud coverage: 75-85%
+- Fog intensity: 30-80%
+- Rain threshold: 75-78% overcast
+- Snow threshold: 78-85% overcast
+- Max wind speed: 12 m/s
+- Storms: Active at 100% overcast only
 
-## Key Parameters Explained
+## Parameter Reference
 
-**Overcast**: Controls cloud coverage (0.0 = clear, 1.0 = fully overcast)
+### Overcast
+Controls cloud coverage across the map.
+- Range: 0.0 (clear) to 1.0 (fully overcast)
+- Affects precipitation triggers
 
-**Fog**: Controls visibility distance (0.0 = no fog, 1.0 = dense fog)
+### Fog
+Controls visibility distance and atmosphere.
+- Range: 0.0 (no fog) to 1.0 (dense fog)
+- Impacts player navigation
 
-**Rain/Snowfall**: Precipitation intensity (0.0 = none, 1.0 = heavy)
+### Rain
+Controls rainfall intensity.
+- Range: 0.0 (none) to 1.0 (heavy)
+- Requires a minimum overcast threshold
 
-**Thresholds**: Overcast levels required for precipitation to start
+### Snowfall
+Controls snow precipitation (winter only).
+- Range: 0.0 (none) to 1.0 (heavy)
+- Requires higher overcast than rain
 
-**Wind Speed**: Maximum wind speed in meters per second
+### Wind
+Controls wind speed and variation.
+- Measured in meters per second (m/s)
+- Affects player movement and sound
 
-**Storm Settings**: Lightning frequency and conditions
+### Storms
+Controls lightning frequency.
+- Density: Lightning intensity (0.0-1.0)
+- Threshold: Overcast level required
+- Timeout: Seconds between strikes
 
-## Customization Tips
+## Customisation Guide
 
-- Lower overcast limits for sunnier weather
-- Increase fog limits for spooky atmosphere
-- Adjust rain thresholds to control when precipitation starts
-- Modify time limits to control how quickly weather changes
-- Change wind speed to affect player movement and sound
+### Increase Sunshine
+Lower the overcast max value:
+```xml
+<limits min="0.0" max="0.4" />
+```
 
-## Technical Notes
+### Add More Fog
+Increase fog max value:
+```xml
+<limits min="0.2" max="0.9" />
+```
 
-- All values range from 0.0 to 1.0 unless specified otherwise
-- Time values are in seconds
-- Reset attribute loads fresh weather instead of saved state
-- Enable attribute must be set to "1" for file to work
+### Control Rain Frequency
+Adjust rain thresholds:
+```xml
+<thresholds min="0.5" max="0.8" end="120" />
+```
+
+### Speed Up Weather Changes
+Reduce time limits:
+```xml
+<timelimits min="300" max="600" />
+```
+
+### Increase Wind
+Raise max wind speed:
+```xml
+<maxspeed>20</maxspeed>
+```
+
+## Technical Details
+
+### File Attributes
+- `reset="1"`: Loads fresh weather (ignores saved state)
+- `enable="1"`: Activates the configuration file
+
+### Value Ranges
+- Weather parameters: 0.0 to 1.0
+- Time values: seconds
+- Wind speed: meters per second
+
+### Thresholds
+Define when precipitation starts based on overcast levels. Rain and snow have separate threshold ranges to prevent overlap.
+
+## Testing
+
+1. Deploy configuration to test server
+2. Monitor weather transitions
+3. Adjust parameters as needed
+4. Back up working configurations
+
+## Requirements
+
+- DayZ server (Xbox)
+- Livonia map
+- Server file access
+- Basic XML knowledge (for customisation)
 
 ## Support
 
-Test changes on a private server first. Back up files before editing. Each seasonal file is standalone and complete.
+Submit issues or suggestions through GitHub Issues. Include your configuration file and description of the problem.
+
+## Credits
+
+Created by FixitDaz
+Date: November 23, 2025
+
+## License
+
+Free to use and modify for your DayZ servers. Attribution appreciated.
